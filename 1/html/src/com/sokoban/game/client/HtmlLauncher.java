@@ -8,15 +8,15 @@ import com.sokoban.game.SokobanGame;
 public class HtmlLauncher extends GwtApplication {
 
         @Override
-        public GwtApplicationConfiguration getConfig () {
+        public GwtApplicationConfiguration getConfig() {
                 // Resizable application, uses available space in browser
-                return new GwtApplicationConfiguration(true);
+                // return new GwtApplicationConfiguration(true);
                 // Fixed size application:
-                //return new GwtApplicationConfiguration(480, 320);
+                return new GwtApplicationConfiguration(640, 640);
         }
 
         @Override
-        public ApplicationListener createApplicationListener () {
+        public ApplicationListener createApplicationListener() {
                 return new SokobanGame();
         }
 }
