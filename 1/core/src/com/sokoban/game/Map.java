@@ -2,6 +2,8 @@ package com.sokoban.game;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.GridPoint2;
+import com.badlogic.gdx.scenes.scene2d.ui.Widget;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
 public class Map implements Disposable {
@@ -35,26 +37,32 @@ public class Map implements Disposable {
     private final int[][] indexMap = {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 3, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 2, 0, 0, 0, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 0, 0, 0, 0, 4, 0 },
+            { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 1, 2, 3, 4, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     };
 
-    public Entity[] entities = new Entity[WIDTH.x * WIDTH.y];
+    public Array<Entity> entities = new Array<Entity>(WIDTH.x * WIDTH.y);
 
     public Map() {
         // Populate entities array
-        for (int i = 0; i < WIDTH.x; i++) {
-            for (int j = 0; j < WIDTH.y; j++) {
-                BlockData data = blockData[indexMap[i][j]];
-                entities[i * WIDTH.x + j] = new Entity(data.localTextureName, new GridPoint2(i, j));
+        for (int x = 0; x < WIDTH.x; x++) {
+            for (int y = 0; y < WIDTH.y; y++) {
+                GridPoint2 position = new GridPoint2(x, y);
+                GridPoint2 positionInIndexMap = toIndexMapPoint(position);
+                BlockData data = blockData[indexMap[positionInIndexMap.x][positionInIndexMap.y]];
+                entities.add(new Entity(data.localTextureName, position));
             }
         }
+    }
+
+    private GridPoint2 toIndexMapPoint(GridPoint2 point) {
+        return new GridPoint2(WIDTH.y - 1 - point.y, point.x);
     }
 
     public void render(SpriteBatch batch) {
@@ -70,7 +78,8 @@ public class Map implements Disposable {
         if (position.y < 0 || position.y >= WIDTH.y)
             return false;
 
-        return blockData[indexMap[position.x][position.y]].passable;
+        GridPoint2 positionInIndexMap = toIndexMapPoint(position);
+        return blockData[indexMap[positionInIndexMap.x][positionInIndexMap.y]].passable;
     }
 
     @Override
