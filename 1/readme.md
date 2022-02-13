@@ -1,5 +1,7 @@
 ## Simple sokoban style game
 
+Try it out [here](https://benasb.github.io/vu-op/).
+
 Used [libgdx](https://libgdx.com/) framework.
 
 Assets from [kenney](https://www.kenney.nl/assets/sokoban).
