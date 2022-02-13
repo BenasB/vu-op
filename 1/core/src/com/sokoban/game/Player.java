@@ -10,7 +10,7 @@ public class Player extends Entity {
         super(localTextureName, position);
     }
 
-    public void update() {
+    public void update(Map map) {
         GridPoint2 newPosition = position.cpy();
 
         if (Gdx.input.isKeyJustPressed(Keys.LEFT))
@@ -23,7 +23,7 @@ public class Player extends Entity {
         if (Gdx.input.isKeyJustPressed(Keys.UP))
             newPosition.y++;
 
-        if (Map.isValidPosition(newPosition))
+        if (map.isValidPosition(newPosition))
             position = newPosition;
     }
 }
