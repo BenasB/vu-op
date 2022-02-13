@@ -10,5 +10,5 @@ If you're unfamiliar with libgdx folder structure, the game logic is located in 
 
 ### Running the project from source files
 
-`./gradlew desktop:run` - desktop version
-`./gradlew html:superDev` - web version (starts a web server at)
+- `./gradlew desktop:run` - desktop version
+- `./gradlew html:superDev` - web version (starts a web server at http://localhost:8080)
