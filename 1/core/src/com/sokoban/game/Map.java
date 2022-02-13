@@ -23,4 +23,16 @@ public class Map {
 
         return null;
     }
+
+    public static boolean isValidPosition(GridPoint2 position) {
+        if (position.x < 0 || position.x >= WIDTH.x)
+            return false;
+
+        if (position.y < 0 || position.y >= WIDTH.y)
+            return false;
+
+        // Check if block is passable
+
+        return true;
+    }
 }
