@@ -4,7 +4,6 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class SokobanGame extends ApplicationAdapter {
@@ -17,7 +16,7 @@ public class SokobanGame extends ApplicationAdapter {
 	@Override
 	public void create() {
 		map = new Map();
-		player = new Player("player.png", new GridPoint2(0, 0));
+		player = new Player();
 
 		// Set up camera
 		camera = new OrthographicCamera();

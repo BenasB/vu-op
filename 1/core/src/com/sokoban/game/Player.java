@@ -6,8 +6,8 @@ import com.badlogic.gdx.math.GridPoint2;
 
 public class Player extends Entity {
 
-    public Player(String localTextureName, GridPoint2 position) {
-        super(localTextureName, position);
+    public Player() {
+        super("player.png", new GridPoint2(4, 4));
     }
 
     public void update(Map map) {
