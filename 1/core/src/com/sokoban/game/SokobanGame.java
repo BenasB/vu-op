@@ -12,7 +12,7 @@ public class SokobanGame extends ApplicationAdapter {
 
 	private Player player;
 	private Flag flag;
-	private Map map;
+	private DynamicMap map;
 	private BlockReplacer blockReplacer;
 	private BlockSelector blockSelector;
 
@@ -22,14 +22,14 @@ public class SokobanGame extends ApplicationAdapter {
 		camera = new OrthographicCamera();
 		final float zoomOutFactor = 1.5f;
 		final float translationFactor = (-1f / 2f) * (zoomOutFactor - 1);
-		camera.setToOrtho(false, zoomOutFactor * Map.BLOCK_SIZE.x * Map.SIZE.x,
-				zoomOutFactor * Map.BLOCK_SIZE.y * Map.SIZE.y);
-		camera.translate(translationFactor * Map.SIZE.x * Map.BLOCK_SIZE.x,
-				translationFactor * Map.SIZE.y * Map.BLOCK_SIZE.y);
+		camera.setToOrtho(false, zoomOutFactor * DynamicMap.BLOCK_SIZE.x * DynamicMap.SIZE.x,
+				zoomOutFactor * DynamicMap.BLOCK_SIZE.y * DynamicMap.SIZE.y);
+		camera.translate(translationFactor * DynamicMap.SIZE.x * DynamicMap.BLOCK_SIZE.x,
+				translationFactor * DynamicMap.SIZE.y * DynamicMap.BLOCK_SIZE.y);
 		batch = new SpriteBatch();
 
 		IndexMap startingIndexMap = IndexMap.MAP_ONE();
-		map = new Map(startingIndexMap, camera);
+		map = new DynamicMap(startingIndexMap, camera);
 		player = new Player(startingIndexMap.playerPosition, map);
 		flag = new Flag(startingIndexMap.flagPosition, player);
 		blockReplacer = new BlockReplacer(map, player, flag);

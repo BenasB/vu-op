@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.MathUtils;
 
-public class Map implements Disposable {
+public class DynamicMap implements Disposable {
 
     static final GridPoint2 BLOCK_SIZE = new GridPoint2(64, 64); // In pixels
     static final GridPoint2 SIZE = new GridPoint2(20, 20); // In game blocks
@@ -17,7 +17,7 @@ public class Map implements Disposable {
     private final Vector3 mouseInWorld3D = new Vector3();
     private BlockEntity[][] entities = new BlockEntity[SIZE.x][SIZE.y];
 
-    public Map(IndexMap startingMap, OrthographicCamera camera) {
+    public DynamicMap(IndexMap startingMap, OrthographicCamera camera) {
         this.camera = camera;
 
         // Populate entities array
@@ -66,8 +66,8 @@ public class Map implements Disposable {
         mouseInWorld3D.z = 0;
         camera.unproject(mouseInWorld3D);
 
-        return new GridPoint2(MathUtils.floor(mouseInWorld3D.x / Map.BLOCK_SIZE.x),
-                MathUtils.floor(mouseInWorld3D.y / Map.BLOCK_SIZE.y));
+        return new GridPoint2(MathUtils.floor(mouseInWorld3D.x / DynamicMap.BLOCK_SIZE.x),
+                MathUtils.floor(mouseInWorld3D.y / DynamicMap.BLOCK_SIZE.y));
     }
 
     @Override

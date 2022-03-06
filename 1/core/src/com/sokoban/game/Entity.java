@@ -19,7 +19,7 @@ public class Entity implements Disposable {
     }
 
     public void render(SpriteBatch batch) {
-        batch.draw(texture, position.x * Map.BLOCK_SIZE.x, position.y * Map.BLOCK_SIZE.y);
+        batch.draw(texture, position.x * DynamicMap.BLOCK_SIZE.x, position.y * DynamicMap.BLOCK_SIZE.y);
     }
 
     @Override

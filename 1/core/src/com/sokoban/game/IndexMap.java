@@ -5,13 +5,13 @@ import com.badlogic.gdx.math.GridPoint2;
 public final class IndexMap {
     public final GridPoint2 playerPosition;
     public final GridPoint2 flagPosition;
-    public final int[][] indexMap = new int[Map.SIZE.y][Map.SIZE.x]; // Coords must be reversed
+    public final int[][] indexMap = new int[DynamicMap.SIZE.y][DynamicMap.SIZE.x]; // Coords must be reversed
 
     private IndexMap(GridPoint2 playerPosition, GridPoint2 flagPosition, int[][] indexMap) {
         this.playerPosition = playerPosition;
         this.flagPosition = flagPosition;
-        for (int i = 0; i < Map.SIZE.y; i++) {
-            for (int j = 0; j < Map.SIZE.x; j++) {
+        for (int i = 0; i < DynamicMap.SIZE.y; i++) {
+            for (int j = 0; j < DynamicMap.SIZE.x; j++) {
                 if (i < indexMap.length && j < indexMap[i].length)
                     this.indexMap[i][j] = indexMap[i][j];
                 else
@@ -55,6 +55,6 @@ public final class IndexMap {
     }
 
     static GridPoint2 toIndexMapPoint(GridPoint2 point) {
-        return new GridPoint2(Map.SIZE.y - 1 - point.y, point.x);
+        return new GridPoint2(DynamicMap.SIZE.y - 1 - point.y, point.x);
     }
 }

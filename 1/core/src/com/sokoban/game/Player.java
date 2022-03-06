@@ -6,9 +6,9 @@ import com.badlogic.gdx.math.GridPoint2;
 
 public class Player extends Entity {
 
-    private final Map map;
+    private final DynamicMap map;
 
-    public Player(GridPoint2 startingPosition, Map map) {
+    public Player(GridPoint2 startingPosition, DynamicMap map) {
         super("player.png", startingPosition);
         this.map = map;
     }

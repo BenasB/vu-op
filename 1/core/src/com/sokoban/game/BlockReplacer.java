@@ -12,11 +12,11 @@ public class BlockReplacer extends Entity {
   private static final Color UNAVAILABLE_COLOR = Color.RED;
 
   private static BlockData selectedBlock = BlockData.BLOCKS[0];
-  private final Map map;
+  private final DynamicMap map;
   private final Player player;
   private final Flag flag;
 
-  public BlockReplacer(Map map, Player player, Flag flag) {
+  public BlockReplacer(DynamicMap map, Player player, Flag flag) {
     super(selectedBlock.localTextureName, new GridPoint2());
     this.map = map;
     this.player = player;

@@ -8,17 +8,17 @@ import com.badlogic.gdx.utils.Disposable;
 
 public class BlockSelector implements Disposable {
 
-  private static final GridPoint2 ORIGIN_POSITION = new GridPoint2(-2, Map.SIZE.y - 1);
+  private static final GridPoint2 ORIGIN_POSITION = new GridPoint2(-2, DynamicMap.SIZE.y - 1);
   private final BlockEntity[] selectableBlocks = new BlockEntity[BlockData.BLOCKS.length];
   private final BlockReplacer blockReplacer;
-  private final Map map;
+  private final DynamicMap map;
 
-  public BlockSelector(BlockReplacer blockReplacer, Map map) {
+  public BlockSelector(BlockReplacer blockReplacer, DynamicMap map) {
     this.map = map;
     this.blockReplacer = blockReplacer;
     for (int i = 0; i < BlockData.BLOCKS.length; i++) {
-      GridPoint2 position = new GridPoint2(ORIGIN_POSITION.x - (i / Map.SIZE.y),
-          ORIGIN_POSITION.y - (i % Map.SIZE.y));
+      GridPoint2 position = new GridPoint2(ORIGIN_POSITION.x - (i / DynamicMap.SIZE.y),
+          ORIGIN_POSITION.y - (i % DynamicMap.SIZE.y));
       selectableBlocks[i] = new BlockEntity(BlockData.BLOCKS[i], position);
     }
   }
