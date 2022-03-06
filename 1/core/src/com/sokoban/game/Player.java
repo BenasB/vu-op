@@ -6,11 +6,14 @@ import com.badlogic.gdx.math.GridPoint2;
 
 public class Player extends Entity {
 
-    public Player(GridPoint2 startingPosition) {
+    private final Map map;
+
+    public Player(GridPoint2 startingPosition, Map map) {
         super("player.png", startingPosition);
+        this.map = map;
     }
 
-    public void update(Map map) {
+    public void update() {
         GridPoint2 newPosition = position.cpy();
 
         if (Gdx.input.isKeyJustPressed(Keys.LEFT))

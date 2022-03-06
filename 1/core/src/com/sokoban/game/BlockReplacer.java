@@ -14,11 +14,13 @@ public class BlockReplacer extends Entity {
   private static BlockData selectedBlock = BlockData.BLOCKS[0];
   private final Map map;
   private final Player player;
+  private final Flag flag;
 
-  public BlockReplacer(Map map, Player player) {
+  public BlockReplacer(Map map, Player player, Flag flag) {
     super(selectedBlock.localTextureName, new GridPoint2());
     this.map = map;
     this.player = player;
+    this.flag = flag;
   }
 
   public void update() {
@@ -36,8 +38,9 @@ public class BlockReplacer extends Entity {
   private boolean canPlace() {
     boolean occupiedByPlayer = player.position.equals(position);
     boolean inMapBounds = map.isPositionInMap(position);
+    boolean occupiedByFlag = flag.position.equals(position);
 
-    return !occupiedByPlayer && inMapBounds;
+    return !occupiedByPlayer && inMapBounds && !occupiedByFlag;
   }
 
   private void trackMouse() {

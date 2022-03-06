@@ -11,6 +11,7 @@ public class SokobanGame extends ApplicationAdapter {
 	private SpriteBatch batch;
 
 	private Player player;
+	private Flag flag;
 	private Map map;
 	private BlockReplacer blockReplacer;
 	private BlockSelector blockSelector;
@@ -19,14 +20,19 @@ public class SokobanGame extends ApplicationAdapter {
 	public void create() {
 		// Set up camera
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 1.5f * Map.BLOCK_SIZE.x * Map.SIZE.x, 1.5f * Map.BLOCK_SIZE.y * Map.SIZE.y);
-		camera.translate(-0.25f * Map.SIZE.x * Map.BLOCK_SIZE.x, -0.25f * Map.SIZE.y * Map.BLOCK_SIZE.y);
+		final float zoomOutFactor = 1.5f;
+		final float translationFactor = (-1f / 2f) * (zoomOutFactor - 1);
+		camera.setToOrtho(false, zoomOutFactor * Map.BLOCK_SIZE.x * Map.SIZE.x,
+				zoomOutFactor * Map.BLOCK_SIZE.y * Map.SIZE.y);
+		camera.translate(translationFactor * Map.SIZE.x * Map.BLOCK_SIZE.x,
+				translationFactor * Map.SIZE.y * Map.BLOCK_SIZE.y);
 		batch = new SpriteBatch();
 
-		IndexMap currentMap = IndexMap.MAP_ONE();
-		map = new Map(currentMap, camera);
-		player = new Player(currentMap.playerPosition);
-		blockReplacer = new BlockReplacer(map, player);
+		IndexMap startingIndexMap = IndexMap.MAP_ONE();
+		map = new Map(startingIndexMap, camera);
+		player = new Player(startingIndexMap.playerPosition, map);
+		flag = new Flag(startingIndexMap.flagPosition, player);
+		blockReplacer = new BlockReplacer(map, player, flag);
 		blockSelector = new BlockSelector(blockReplacer, map);
 	}
 
@@ -39,11 +45,13 @@ public class SokobanGame extends ApplicationAdapter {
 		batch.begin();
 		map.render(batch);
 		player.render(batch);
+		flag.render(batch);
 		blockReplacer.render(batch);
 		blockSelector.render(batch);
 		batch.end();
 
-		player.update(map);
+		player.update();
+		flag.update();
 		blockReplacer.update();
 		blockSelector.update();
 	}
@@ -52,6 +60,7 @@ public class SokobanGame extends ApplicationAdapter {
 	public void dispose() {
 		batch.dispose();
 		player.dispose();
+		flag.dispose();
 		map.dispose();
 		blockReplacer.dispose();
 		blockSelector.dispose();
