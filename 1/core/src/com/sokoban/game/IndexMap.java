@@ -8,7 +8,7 @@ public final class IndexMap {
     }
 
     // Must be exactly Map.WIDTH.X wide and Map.WIDTH.y tall
-    static final int[][] MapOne = {
+    static final int[][] MAP_ONE = {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
             { 4, 0, 0, 0, 0, 4, 0, 3, 4, 3 },
             { 0, 0, 3, 0, 0, 3, 0, 4, 0, 0 },
@@ -21,7 +21,7 @@ public final class IndexMap {
             { 0, 0, 1, 1, 0, 0, 0, 0, 0, 0 },
     };
 
-    static final int[][] MapTwo = {
+    static final int[][] MAP_TWO = {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -35,6 +35,6 @@ public final class IndexMap {
     };
 
     static GridPoint2 toIndexMapPoint(GridPoint2 point) {
-        return new GridPoint2(Map.WIDTH.y - 1 - point.y, point.x);
+        return new GridPoint2(Map.SIZE.y - 1 - point.y, point.x);
     }
 }

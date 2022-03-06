@@ -13,7 +13,7 @@ public class BlockData {
         this.passable = passable;
     }
 
-    public static final BlockData[] blocks = {
+    public static final BlockData[] BLOCKS = {
             new BlockData("ground.png"),
             new BlockData("grass.png"),
             new BlockData("block.png", false),

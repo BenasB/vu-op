@@ -3,23 +3,20 @@ package com.sokoban.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.GridPoint2;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.MathUtils;
 
 public class BlockReplacer extends Entity {
 
-  private static BlockData selectedBlock = BlockData.blocks[4];
-  private final Vector3 mouseInWorld3D = new Vector3();
-  private final OrthographicCamera camera;
+  private static final Color AVAILABLE_COLOR = Color.GREEN;
+  private static final Color UNAVAILABLE_COLOR = Color.RED;
+
+  private static BlockData selectedBlock = BlockData.BLOCKS[4];
   private final Map map;
   private final Player player;
 
-  public BlockReplacer(OrthographicCamera camera, Map map, Player player) {
+  public BlockReplacer(Map map, Player player) {
     super(selectedBlock.localTextureName, new GridPoint2());
-    this.camera = camera;
     this.map = map;
     this.player = player;
   }
@@ -31,22 +28,20 @@ public class BlockReplacer extends Entity {
 
   @Override
   public void render(SpriteBatch batch) {
-    batch.setColor(canPlace() ? Color.GREEN : Color.RED);
+    batch.setColor(canPlace() ? AVAILABLE_COLOR : UNAVAILABLE_COLOR);
     super.render(batch);
     batch.setColor(Color.WHITE);
   }
 
   private boolean canPlace() {
-    return !player.position.equals(position);
+    boolean occupiedByPlayer = player.position.equals(position);
+    boolean inMapBounds = map.isPositionInMap(position);
+
+    return !occupiedByPlayer && inMapBounds;
   }
 
   private void trackMouse() {
-    mouseInWorld3D.x = Gdx.input.getX();
-    mouseInWorld3D.y = Gdx.input.getY();
-    mouseInWorld3D.z = 0;
-    camera.unproject(mouseInWorld3D);
-
-    position = snapToGrid(mouseInWorld3D);
+    position = map.getMousePositionInWorldSpace();
   }
 
   private void setBlockOnClick() {
@@ -55,8 +50,8 @@ public class BlockReplacer extends Entity {
     }
   }
 
-  private GridPoint2 snapToGrid(Vector3 vectorPosition) {
-    return new GridPoint2(MathUtils.floor(vectorPosition.x / Map.BLOCK_SIZE.x),
-        MathUtils.floor(vectorPosition.y / Map.BLOCK_SIZE.y));
+  public void changeBlockSelection(BlockData data) {
+    selectedBlock = data;
+    setTexture(selectedBlock.localTextureName);
   }
 }

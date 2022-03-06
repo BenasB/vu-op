@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.Disposable;
 // They should be initialized in start() method
 public class Entity implements Disposable {
 
-    private final Texture texture;
+    private Texture texture;
     protected GridPoint2 position;
 
     public Entity(String localTextureName, GridPoint2 position) {
@@ -25,5 +25,9 @@ public class Entity implements Disposable {
     @Override
     public void dispose() {
         texture.dispose();
+    }
+
+    public void setTexture(String newLocalTextureName) {
+        texture = new Texture(Gdx.files.internal(newLocalTextureName));
     }
 }
