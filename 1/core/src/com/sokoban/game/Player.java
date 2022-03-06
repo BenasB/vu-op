@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.GridPoint2;
 
-public class Player extends Entity {
+public class Player extends Entity implements IResetableEntity {
 
     private final DynamicMap map;
     private final Texture[] walkingTextures = {
@@ -18,8 +18,8 @@ public class Player extends Entity {
 
     private Texture currentWalkingTexture = walkingTextures[2];
 
-    public Player(GridPoint2 startingPosition, DynamicMap map) {
-        super("player-south.png", startingPosition);
+    public Player(DynamicMap map) {
+        super("player-south.png", new GridPoint2());
 
         this.map = map;
     }
@@ -66,5 +66,11 @@ public class Player extends Entity {
         for (Texture texture : walkingTextures) {
             texture.dispose();
         }
+    }
+
+    @Override
+    public void reset(GridPoint2 newPosition) {
+        position.set(newPosition);
+        currentWalkingTexture = walkingTextures[2];
     }
 }

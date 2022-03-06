@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class SokobanGame extends ApplicationAdapter {
@@ -16,18 +17,17 @@ public class SokobanGame extends ApplicationAdapter {
 	private DynamicMap map;
 	private BlockReplacer blockReplacer;
 	private BlockSelector blockSelector;
-	private final IndexMap startingIndexMap = IndexMap.MAP_ONE();
 
 	@Override
 	public void create() {
 		OrthographicCamera internalCamera = new OrthographicCamera();
 		batch = new SpriteBatch();
 
-		map = new DynamicMap(startingIndexMap, internalCamera);
-		player = new Player(startingIndexMap.playerPosition, map);
+		map = new DynamicMap(internalCamera);
+		player = new Player(map);
 		camera = new GameCamera(internalCamera, player);
-		gameManager = new GameManager(camera);
-		flag = new Flag(startingIndexMap.flagPosition, player);
+		flag = new Flag(player);
+		gameManager = new GameManager(camera, player, flag, map);
 		blockReplacer = new BlockReplacer(map, player, flag);
 		blockSelector = new BlockSelector(blockReplacer, map);
 	}

@@ -17,9 +17,12 @@ public class DynamicMap implements Disposable {
     private final Vector3 mouseInWorld3D = new Vector3();
     private BlockEntity[][] entities = new BlockEntity[SIZE.x][SIZE.y];
 
-    public DynamicMap(IndexMap startingMap, OrthographicCamera camera) {
+    public DynamicMap(OrthographicCamera camera) {
         this.camera = camera;
+    }
 
+    public void initialize(IndexMap startingMap) {
+        entities = new BlockEntity[SIZE.x][SIZE.y];
         // Populate entities array
         for (int x = 0; x < SIZE.x; x++) {
             for (int y = 0; y < SIZE.y; y++) {
