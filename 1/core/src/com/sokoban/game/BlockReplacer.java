@@ -11,7 +11,7 @@ public class BlockReplacer extends Entity {
   private static final Color AVAILABLE_COLOR = Color.GREEN;
   private static final Color UNAVAILABLE_COLOR = Color.RED;
 
-  private static BlockData selectedBlock = BlockData.BLOCKS[4];
+  private static BlockData selectedBlock = BlockData.BLOCKS[0];
   private final Map map;
   private final Player player;
 

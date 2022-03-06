@@ -17,7 +17,7 @@ public class BlockSelector implements Disposable {
     this.map = map;
     this.blockReplacer = blockReplacer;
     for (int i = 0; i < BlockData.BLOCKS.length; i++) {
-      GridPoint2 position = new GridPoint2(ORIGIN_POSITION.x + (i / Map.SIZE.y),
+      GridPoint2 position = new GridPoint2(ORIGIN_POSITION.x - (i / Map.SIZE.y),
           ORIGIN_POSITION.y - (i % Map.SIZE.y));
       selectableBlocks[i] = new BlockEntity(BlockData.BLOCKS[i], position);
     }
