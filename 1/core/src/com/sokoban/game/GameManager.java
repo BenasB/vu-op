@@ -14,7 +14,8 @@ public class GameManager {
 
   private final IndexMap[] indexMaps = {
       IndexMap.MAP_ONE(),
-      IndexMap.MAP_TWO()
+      IndexMap.MAP_TWO(),
+      IndexMap.MAP_THREE(),
   };
 
   private int currentMap = -1;
