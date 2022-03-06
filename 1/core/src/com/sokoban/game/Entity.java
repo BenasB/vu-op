@@ -18,7 +18,7 @@ public class Entity implements Disposable {
         this.position = position;
     }
 
-    public final void render(SpriteBatch batch) {
+    public void render(SpriteBatch batch) {
         batch.draw(texture, position.x * Map.BLOCK_SIZE.x, position.y * Map.BLOCK_SIZE.y);
     }
 

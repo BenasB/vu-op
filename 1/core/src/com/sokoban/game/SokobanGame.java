@@ -12,16 +12,18 @@ public class SokobanGame extends ApplicationAdapter {
 
 	private Player player;
 	private Map map;
+	private BlockReplacer blockReplacer;
 
 	@Override
 	public void create() {
-		map = new Map(IndexMap.MapOne);
-		player = new Player();
-
 		// Set up camera
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Map.BLOCK_SIZE.x * Map.WIDTH.x, Map.BLOCK_SIZE.y * Map.WIDTH.y);
 		batch = new SpriteBatch();
+
+		map = new Map(IndexMap.MapOne);
+		player = new Player();
+		blockReplacer = new BlockReplacer(camera, map, player);
 	}
 
 	@Override
@@ -32,9 +34,11 @@ public class SokobanGame extends ApplicationAdapter {
 		batch.begin();
 		map.render(batch);
 		player.render(batch);
+		blockReplacer.render(batch);
 		batch.end();
 
 		player.update(map);
+		blockReplacer.update();
 	}
 
 	@Override

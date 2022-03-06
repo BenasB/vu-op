@@ -18,7 +18,7 @@ public class Map implements Disposable {
                 GridPoint2 position = new GridPoint2(x, y);
                 GridPoint2 positionInIndexMap = IndexMap.toIndexMapPoint(position);
                 BlockData data = BlockData.blocks[startingIndexMap[positionInIndexMap.x][positionInIndexMap.y]];
-                entities[position.x][position.y] = new BlockEntity(data, position);
+                setBlock(data, position);
             }
         }
     }
@@ -29,6 +29,10 @@ public class Map implements Disposable {
                 blockEntity.render(batch);
             }
         }
+    }
+
+    public void setBlock(BlockData blockData, GridPoint2 position) {
+        entities[position.x][position.y] = new BlockEntity(blockData, position);
     }
 
     public boolean isValidPosition(GridPoint2 position) {

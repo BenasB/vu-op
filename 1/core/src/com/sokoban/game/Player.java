@@ -6,8 +6,10 @@ import com.badlogic.gdx.math.GridPoint2;
 
 public class Player extends Entity {
 
+    static final GridPoint2 startingPosition = new GridPoint2(4, 4);
+
     public Player() {
-        super("player.png", new GridPoint2(4, 4));
+        super("player.png", startingPosition);
     }
 
     public void update(Map map) {
