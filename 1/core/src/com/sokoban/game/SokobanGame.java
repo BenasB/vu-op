@@ -19,12 +19,13 @@ public class SokobanGame extends ApplicationAdapter {
 	public void create() {
 		// Set up camera
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 2 * Map.BLOCK_SIZE.x * Map.SIZE.x, 2 * Map.BLOCK_SIZE.y * Map.SIZE.y);
-		camera.translate(-1 / 2f * Map.SIZE.x * Map.BLOCK_SIZE.x, -1 / 2f * Map.SIZE.y * Map.BLOCK_SIZE.y);
+		camera.setToOrtho(false, 1.5f * Map.BLOCK_SIZE.x * Map.SIZE.x, 1.5f * Map.BLOCK_SIZE.y * Map.SIZE.y);
+		camera.translate(-0.25f * Map.SIZE.x * Map.BLOCK_SIZE.x, -0.25f * Map.SIZE.y * Map.BLOCK_SIZE.y);
 		batch = new SpriteBatch();
 
-		map = new Map(IndexMap.MAP_ONE, camera);
-		player = new Player();
+		IndexMap currentMap = IndexMap.MAP_ONE();
+		map = new Map(currentMap, camera);
+		player = new Player(currentMap.playerPosition);
 		blockReplacer = new BlockReplacer(map, player);
 		blockSelector = new BlockSelector(blockReplacer, map);
 	}

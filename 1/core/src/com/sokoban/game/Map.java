@@ -11,13 +11,13 @@ import com.badlogic.gdx.math.MathUtils;
 public class Map implements Disposable {
 
     static final GridPoint2 BLOCK_SIZE = new GridPoint2(64, 64); // In pixels
-    static final GridPoint2 SIZE = new GridPoint2(10, 10); // In game blocks
+    static final GridPoint2 SIZE = new GridPoint2(20, 20); // In game blocks
 
     private final OrthographicCamera camera;
     private final Vector3 mouseInWorld3D = new Vector3();
     private BlockEntity[][] entities = new BlockEntity[SIZE.x][SIZE.y];
 
-    public Map(int[][] startingIndexMap, OrthographicCamera camera) {
+    public Map(IndexMap startingMap, OrthographicCamera camera) {
         this.camera = camera;
 
         // Populate entities array
@@ -25,7 +25,10 @@ public class Map implements Disposable {
             for (int y = 0; y < SIZE.y; y++) {
                 GridPoint2 position = new GridPoint2(x, y);
                 GridPoint2 positionInIndexMap = IndexMap.toIndexMapPoint(position);
-                BlockData data = BlockData.BLOCKS[startingIndexMap[positionInIndexMap.x][positionInIndexMap.y]];
+                int blockIndex = startingMap.indexMap[positionInIndexMap.x][positionInIndexMap.y];
+                if (blockIndex < 0 || blockIndex >= BlockData.BLOCKS.length)
+                    blockIndex = 0;
+                BlockData data = BlockData.BLOCKS[blockIndex];
                 setBlock(data, position);
             }
         }
