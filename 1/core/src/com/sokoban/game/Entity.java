@@ -18,6 +18,11 @@ public class Entity implements Disposable {
         this.position = position;
     }
 
+    public Entity(Texture texture, GridPoint2 position) {
+        this.texture = texture;
+        this.position = position;
+    }
+
     public void render(SpriteBatch batch) {
         batch.draw(texture, position.x * DynamicMap.BLOCK_SIZE.x, position.y * DynamicMap.BLOCK_SIZE.y);
     }

@@ -2,14 +2,25 @@ package com.sokoban.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.GridPoint2;
 
 public class Player extends Entity {
 
     private final DynamicMap map;
+    private final Texture[] walkingTextures = {
+            new Texture(Gdx.files.internal("player-north.png")),
+            new Texture(Gdx.files.internal("player-east.png")),
+            new Texture(Gdx.files.internal("player-south.png")),
+            new Texture(Gdx.files.internal("player-west.png")),
+    };
+
+    private Texture currentWalkingTexture = walkingTextures[2];
 
     public Player(GridPoint2 startingPosition, DynamicMap map) {
-        super("player.png", startingPosition);
+        super("player-south.png", startingPosition);
+
         this.map = map;
     }
 
@@ -18,18 +29,42 @@ public class Player extends Entity {
             return;
 
         GridPoint2 newPosition = position.cpy();
+        Texture newTexture = currentWalkingTexture;
 
-        if (Gdx.input.isKeyJustPressed(Keys.LEFT))
+        if (Gdx.input.isKeyJustPressed(Keys.LEFT)) {
             newPosition.x--;
-        if (Gdx.input.isKeyJustPressed(Keys.RIGHT))
+            newTexture = walkingTextures[3];
+        }
+        if (Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
             newPosition.x++;
+            newTexture = walkingTextures[1];
+        }
 
-        if (Gdx.input.isKeyJustPressed(Keys.DOWN))
+        if (Gdx.input.isKeyJustPressed(Keys.DOWN)) {
             newPosition.y--;
-        if (Gdx.input.isKeyJustPressed(Keys.UP))
+            newTexture = walkingTextures[2];
+        }
+        if (Gdx.input.isKeyJustPressed(Keys.UP)) {
             newPosition.y++;
+            newTexture = walkingTextures[0];
+        }
 
-        if (map.isValidPosition(newPosition))
+        if (map.isValidPosition(newPosition)) {
             position = newPosition;
+            currentWalkingTexture = newTexture;
+        }
+    }
+
+    @Override
+    public void render(SpriteBatch batch) {
+        batch.draw(currentWalkingTexture, position.x * DynamicMap.BLOCK_SIZE.x, position.y * DynamicMap.BLOCK_SIZE.y);
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        for (Texture texture : walkingTextures) {
+            texture.dispose();
+        }
     }
 }
