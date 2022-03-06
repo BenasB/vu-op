@@ -10,15 +10,17 @@ public class Map implements Disposable {
     static final GridPoint2 BLOCK_SIZE = new GridPoint2(64, 64); // In pixels
     static final GridPoint2 WIDTH = new GridPoint2(10, 10); // In game blocks
 
+    private int[][] indexMap;
     public Array<Entity> entities = new Array<Entity>(WIDTH.x * WIDTH.y);
 
-    public Map() {
+    public Map(int[][] indexMap) {
+        this.indexMap = indexMap;
         // Populate entities array
         for (int x = 0; x < WIDTH.x; x++) {
             for (int y = 0; y < WIDTH.y; y++) {
                 GridPoint2 position = new GridPoint2(x, y);
                 GridPoint2 positionInIndexMap = IndexMap.toIndexMapPoint(position);
-                BlockData data = BlockData.blocks[IndexMap.blocks[positionInIndexMap.x][positionInIndexMap.y]];
+                BlockData data = BlockData.blocks[indexMap[positionInIndexMap.x][positionInIndexMap.y]];
                 entities.add(new Entity(data.localTextureName, position));
             }
         }
@@ -38,7 +40,7 @@ public class Map implements Disposable {
             return false;
 
         GridPoint2 positionInIndexMap = IndexMap.toIndexMapPoint(position);
-        return BlockData.blocks[IndexMap.blocks[positionInIndexMap.x][positionInIndexMap.y]].passable;
+        return BlockData.blocks[indexMap[positionInIndexMap.x][positionInIndexMap.y]].passable;
     }
 
     @Override

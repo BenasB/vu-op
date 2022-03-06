@@ -15,7 +15,7 @@ public class SokobanGame extends ApplicationAdapter {
 
 	@Override
 	public void create() {
-		map = new Map();
+		map = new Map(IndexMap.MapTwo);
 		player = new Player();
 
 		// Set up camera
