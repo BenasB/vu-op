@@ -2,7 +2,6 @@ package com.sokoban.game;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.GridPoint2;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
 public class Map implements Disposable {
@@ -10,25 +9,25 @@ public class Map implements Disposable {
     static final GridPoint2 BLOCK_SIZE = new GridPoint2(64, 64); // In pixels
     static final GridPoint2 WIDTH = new GridPoint2(10, 10); // In game blocks
 
-    private int[][] indexMap;
-    public Array<Entity> entities = new Array<Entity>(WIDTH.x * WIDTH.y);
+    private BlockEntity[][] entities = new BlockEntity[WIDTH.x][WIDTH.y];
 
-    public Map(int[][] indexMap) {
-        this.indexMap = indexMap;
+    public Map(int[][] startingIndexMap) {
         // Populate entities array
         for (int x = 0; x < WIDTH.x; x++) {
             for (int y = 0; y < WIDTH.y; y++) {
                 GridPoint2 position = new GridPoint2(x, y);
                 GridPoint2 positionInIndexMap = IndexMap.toIndexMapPoint(position);
-                BlockData data = BlockData.blocks[indexMap[positionInIndexMap.x][positionInIndexMap.y]];
-                entities.add(new Entity(data.localTextureName, position));
+                BlockData data = BlockData.blocks[startingIndexMap[positionInIndexMap.x][positionInIndexMap.y]];
+                entities[position.x][position.y] = new BlockEntity(data, position);
             }
         }
     }
 
     public void render(SpriteBatch batch) {
-        for (Entity entity : entities) {
-            entity.render(batch);
+        for (BlockEntity[] blockEntities : entities) {
+            for (BlockEntity blockEntity : blockEntities) {
+                blockEntity.render(batch);
+            }
         }
     }
 
@@ -39,14 +38,15 @@ public class Map implements Disposable {
         if (position.y < 0 || position.y >= WIDTH.y)
             return false;
 
-        GridPoint2 positionInIndexMap = IndexMap.toIndexMapPoint(position);
-        return BlockData.blocks[indexMap[positionInIndexMap.x][positionInIndexMap.y]].passable;
+        return entities[position.x][position.y].getBlockData().passable;
     }
 
     @Override
     public void dispose() {
-        for (Entity entity : entities) {
-            entity.dispose();
+        for (BlockEntity[] blockEntities : entities) {
+            for (BlockEntity blockEntity : blockEntities) {
+                blockEntity.dispose();
+            }
         }
     }
 }
