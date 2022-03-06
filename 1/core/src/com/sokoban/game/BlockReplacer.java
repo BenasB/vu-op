@@ -24,12 +24,16 @@ public class BlockReplacer extends Entity {
   }
 
   public void update() {
+    if (!GameManager.isInEditor())
+      return;
     trackMouse();
     setBlockOnClick();
   }
 
   @Override
   public void render(SpriteBatch batch) {
+    if (!GameManager.isInEditor())
+      return;
     batch.setColor(canPlace() ? AVAILABLE_COLOR : UNAVAILABLE_COLOR);
     super.render(batch);
     batch.setColor(Color.WHITE);

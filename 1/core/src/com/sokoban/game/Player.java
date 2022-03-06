@@ -14,6 +14,9 @@ public class Player extends Entity {
     }
 
     public void update() {
+        if (GameManager.isInEditor())
+            return;
+
         GridPoint2 newPosition = position.cpy();
 
         if (Gdx.input.isKeyJustPressed(Keys.LEFT))

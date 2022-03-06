@@ -7,30 +7,26 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class SokobanGame extends ApplicationAdapter {
-	private OrthographicCamera camera;
+	private GameCamera camera;
 	private SpriteBatch batch;
 
+	private GameManager gameManager;
 	private Player player;
 	private Flag flag;
 	private DynamicMap map;
 	private BlockReplacer blockReplacer;
 	private BlockSelector blockSelector;
+	private final IndexMap startingIndexMap = IndexMap.MAP_ONE();
 
 	@Override
 	public void create() {
-		// Set up camera
-		camera = new OrthographicCamera();
-		final float zoomOutFactor = 1.5f;
-		final float translationFactor = (-1f / 2f) * (zoomOutFactor - 1);
-		camera.setToOrtho(false, zoomOutFactor * DynamicMap.BLOCK_SIZE.x * DynamicMap.SIZE.x,
-				zoomOutFactor * DynamicMap.BLOCK_SIZE.y * DynamicMap.SIZE.y);
-		camera.translate(translationFactor * DynamicMap.SIZE.x * DynamicMap.BLOCK_SIZE.x,
-				translationFactor * DynamicMap.SIZE.y * DynamicMap.BLOCK_SIZE.y);
+		OrthographicCamera internalCamera = new OrthographicCamera();
 		batch = new SpriteBatch();
 
-		IndexMap startingIndexMap = IndexMap.MAP_ONE();
-		map = new DynamicMap(startingIndexMap, camera);
+		map = new DynamicMap(startingIndexMap, internalCamera);
 		player = new Player(startingIndexMap.playerPosition, map);
+		camera = new GameCamera(internalCamera, player);
+		gameManager = new GameManager(camera);
 		flag = new Flag(startingIndexMap.flagPosition, player);
 		blockReplacer = new BlockReplacer(map, player, flag);
 		blockSelector = new BlockSelector(blockReplacer, map);
@@ -38,9 +34,9 @@ public class SokobanGame extends ApplicationAdapter {
 
 	@Override
 	public void render() {
-		ScreenUtils.clear(new Color(0x333333ff)); // 0xaa733cff
-		camera.update();
-		batch.setProjectionMatrix(camera.combined);
+		ScreenUtils.clear(GameManager.isInEditor() ? new Color(0x333333ff) : new Color(0xaa733cff));
+		camera.internal.update();
+		batch.setProjectionMatrix(camera.internal.combined);
 
 		batch.begin();
 		map.render(batch);
@@ -50,7 +46,9 @@ public class SokobanGame extends ApplicationAdapter {
 		blockSelector.render(batch);
 		batch.end();
 
+		gameManager.update();
 		player.update();
+		camera.update();
 		flag.update();
 		blockReplacer.update();
 		blockSelector.update();
