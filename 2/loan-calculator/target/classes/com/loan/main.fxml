@@ -7,22 +7,22 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" prefHeight="768.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.loan.controllers.MainController">
+<VBox alignment="TOP_CENTER" prefHeight="768.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.loan.controllers.MainController">
    <children>
       <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="Mortgage">
             <items>
-              <MenuItem mnemonicParsing="false" text="New" />
-                  <MenuItem mnemonicParsing="false" text="Filter" />
-                  <MenuItem mnemonicParsing="false" text="Defer" />
+              <MenuItem mnemonicParsing="false" onAction="#openNew" text="New" />
+                  <MenuItem mnemonicParsing="false" onAction="#openFilter" text="Filter" />
+                  <MenuItem mnemonicParsing="false" onAction="#openDefer" text="Defer" />
                   <MenuItem mnemonicParsing="false" text="Chart" />
                   <MenuItem mnemonicParsing="false" text="Export" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#switchToAbout" text="About" />
+                  <MenuItem mnemonicParsing="false" onAction="#openAbout" text="About" />
                </items>
             </Menu>
         </menus>
