@@ -36,18 +36,22 @@ public class DeferController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Maybe set max val depending on existing mortgage term ?
-        SpinnerValueFactory<Integer> fromYearValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99,
+        SpinnerValueFactory<Integer> fromYearValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                0, 99,
                 0);
         fromYearSpinner.setValueFactory(fromYearValueFactory);
-        SpinnerValueFactory<Integer> durationYearValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,
+        SpinnerValueFactory<Integer> durationYearValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                0,
                 99, 0);
         durationYearSpinner.setValueFactory(durationYearValueFactory);
 
-        SpinnerValueFactory<Integer> fromMonthValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 11,
+        SpinnerValueFactory<Integer> fromMonthValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                0, 11,
                 0);
         fromMonthSpinner.setValueFactory(fromMonthValueFactory);
 
-        SpinnerValueFactory<Integer> durationMonthValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,
+        SpinnerValueFactory<Integer> durationMonthValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                0,
                 11, 0);
         durationMonthSpinner.setValueFactory(durationMonthValueFactory);
     }
