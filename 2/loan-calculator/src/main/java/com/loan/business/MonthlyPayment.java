@@ -6,37 +6,43 @@ class MonthlyPayment {
   private int month;
   private double paymentAmount, principalRepayment, interestRepayment, principal;
 
-  public int getMonth() {
+  int getMonth() {
     return month;
   };
 
-  public double getMonthlyPayment() {
+  double getMonthlyPayment() {
     return paymentAmount;
   };
 
-  public double getPrincipalRepayment() {
+  double getPrincipalRepayment() {
     return principalRepayment;
   };
 
-  public double getInterestRepayment() {
+  double getInterestRepayment() {
     return interestRepayment;
   };
 
-  public double getPrincipal() {
+  double getPrincipal() {
     return principal;
   };
 
-  MonthlyPayment(int month, double monthlyPayment, double principalRepayment, double interestRepayment,
+  MonthlyPayment(int month, double paymentAmount, double principalRepayment, double interestRepayment,
       double principal) {
     this.month = month;
-    this.paymentAmount = monthlyPayment;
+    this.paymentAmount = paymentAmount;
     this.principalRepayment = principalRepayment;
     this.interestRepayment = interestRepayment;
     this.principal = principal;
   }
 
   boolean inInterval(FilterInputData inputData) {
-    return (month >= (inputData.fromYears * 12 + inputData.fromMonths))
+    return (month > (inputData.fromYears * 12 + inputData.fromMonths))
         && (month <= (inputData.toYears * 12 + inputData.toMonths));
+  }
+
+  @Override
+  public String toString() {
+    return "Month: " + month + ", Payment Amount: " + paymentAmount + ", Principal Repayment: " + principalRepayment
+        + ", Interest Repayment: " + interestRepayment + ", Principal: " + principal;
   }
 }
