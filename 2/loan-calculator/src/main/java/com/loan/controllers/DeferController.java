@@ -3,17 +3,26 @@ package com.loan.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.loan.WindowManager;
+import com.loan.business.Mortgage;
+import com.loan.dto.DeferInputData;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class DeferController implements Initializable {
 
     @FXML
     Button cancelButton;
+
+    @FXML
+    Button submitButton;
 
     @FXML
     Spinner<Integer> fromYearSpinner;
@@ -28,8 +37,25 @@ public class DeferController implements Initializable {
     Spinner<Integer> durationMonthSpinner;
 
     @FXML
-    private void closeWindow() throws IOException {
+    TextField yearlyInterest;
+
+    @FXML
+    private void closeWindow() {
         Stage currentStage = (Stage) cancelButton.getScene().getWindow();
+        currentStage.close();
+    }
+
+    @FXML
+    private void defer() throws IOException {
+        Mortgage mortgage = Mortgage.getInstance();
+        DeferInputData inputData = new DeferInputData(fromYearSpinner.getValue(), fromMonthSpinner.getValue(),
+                durationYearSpinner.getValue(), durationMonthSpinner.getValue(),
+                Double.parseDouble(yearlyInterest.getText()));
+
+        mortgage.defer(inputData);
+
+        Stage currentStage = (Stage) submitButton.getScene().getWindow();
+        WindowManager.changeMainWindowContent("main");
         currentStage.close();
     }
 

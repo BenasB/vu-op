@@ -40,14 +40,14 @@
                         <Label text="Months" />
                      </children>
                   </HBox>
-                  <TextField alignment="CENTER_RIGHT" promptText="2.4" />
+                  <TextField fx:id="yearlyInterest" alignment="CENTER_RIGHT" promptText="2.4" />
                </children>
             </VBox>
          </children>
       </HBox>
       <HBox alignment="TOP_CENTER" prefWidth="200.0" spacing="100.0">
          <children>
-            <Button mnemonicParsing="false" prefWidth="100.0" text="Ok" />
+            <Button fx:id="submitButton" mnemonicParsing="false" onAction="#defer" prefWidth="100.0" text="Ok" />
             <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#closeWindow" prefWidth="100.0" text="Cancel" />
          </children>
       </HBox>

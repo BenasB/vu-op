@@ -13,6 +13,10 @@ public class MonthlyPayment {
     return month;
   };
 
+  public void setMonth(int value) {
+    month = value;
+  };
+
   public double getMonthlyPayment() {
     return round(monthlyPayment, 2);
   };

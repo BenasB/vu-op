@@ -44,7 +44,7 @@ public class NewController implements Initializable {
     TextField yearlyInterestField;
 
     @FXML
-    private void closeWindow() throws IOException {
+    private void closeWindow() {
         Stage currentStage = (Stage) cancelButton.getScene().getWindow();
         currentStage.close();
     }
