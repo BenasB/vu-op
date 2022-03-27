@@ -1,35 +1,38 @@
 package com.loan.business;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import com.loan.dto.FilterInputData;
 
-class MonthlyPayment {
+public class MonthlyPayment {
   private int month;
-  private double paymentAmount, principalRepayment, interestRepayment, principal;
+  private double monthlyPayment, principalRepayment, interestRepayment, principal;
 
-  int getMonth() {
+  public int getMonth() {
     return month;
   };
 
-  double getMonthlyPayment() {
-    return paymentAmount;
+  public double getMonthlyPayment() {
+    return round(monthlyPayment, 2);
   };
 
-  double getPrincipalRepayment() {
-    return principalRepayment;
+  public double getPrincipalRepayment() {
+    return round(principalRepayment, 2);
   };
 
-  double getInterestRepayment() {
-    return interestRepayment;
+  public double getInterestRepayment() {
+    return round(interestRepayment, 2);
   };
 
-  double getPrincipal() {
-    return principal;
+  public double getPrincipal() {
+    return round(principal, 2);
   };
 
-  MonthlyPayment(int month, double paymentAmount, double principalRepayment, double interestRepayment,
+  MonthlyPayment(int month, double monthlyPayment, double principalRepayment, double interestRepayment,
       double principal) {
     this.month = month;
-    this.paymentAmount = paymentAmount;
+    this.monthlyPayment = monthlyPayment;
     this.principalRepayment = principalRepayment;
     this.interestRepayment = interestRepayment;
     this.principal = principal;
@@ -42,7 +45,16 @@ class MonthlyPayment {
 
   @Override
   public String toString() {
-    return "Month: " + month + ", Payment Amount: " + paymentAmount + ", Principal Repayment: " + principalRepayment
+    return "Month: " + month + ", Payment Amount: " + monthlyPayment + ", Principal Repayment: " + principalRepayment
         + ", Interest Repayment: " + interestRepayment + ", Principal: " + principal;
+  }
+
+  private static double round(double value, int places) {
+    if (places < 0)
+      throw new IllegalArgumentException();
+
+    BigDecimal bd = BigDecimal.valueOf(value);
+    bd = bd.setScale(places, RoundingMode.HALF_UP);
+    return bd.doubleValue();
   }
 }

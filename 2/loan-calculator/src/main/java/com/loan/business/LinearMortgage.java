@@ -11,7 +11,7 @@ public class LinearMortgage extends Mortgage {
   @Override
   MonthlyPayment[] generateMonthlyPayments(NewInputData inputData) {
     int months = inputData.years * 12 + inputData.months;
-    double monthlyInterest = inputData.yearlyInterest / 12;
+    double monthlyInterest = inputData.yearlyInterest / (12 * 100);
     double principalRepayment = inputData.amount / months;
 
     MonthlyPayment[] result = new MonthlyPayment[months];
