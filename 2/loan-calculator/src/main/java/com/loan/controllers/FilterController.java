@@ -3,6 +3,11 @@ package com.loan.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.loan.WindowManager;
+import com.loan.business.Mortgage;
+import com.loan.dto.FilterInputData;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -11,6 +16,9 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.stage.Stage;
 
 public class FilterController implements Initializable {
+    @FXML
+    Button submitButton;
+
     @FXML
     Button cancelButton;
 
@@ -29,6 +37,18 @@ public class FilterController implements Initializable {
     @FXML
     private void closeWindow() throws IOException {
         Stage currentStage = (Stage) cancelButton.getScene().getWindow();
+        currentStage.close();
+    }
+
+    @FXML
+    private void filterPayments() throws IOException {
+        Mortgage mortgage = Mortgage.getInstance();
+        FilterInputData inputData = new FilterInputData(fromYearSpinner.getValue(), fromMonthSpinner.getValue(),
+                toYearSpinner.getValue(), toMonthSpinner.getValue());
+        mortgage.filter(inputData);
+
+        Stage currentStage = (Stage) submitButton.getScene().getWindow();
+        WindowManager.changeMainWindowContent("main");
         currentStage.close();
     }
 
