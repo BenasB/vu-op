@@ -1,10 +1,12 @@
 package com.loan.controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.loan.WindowManager;
+import com.loan.business.Exporter;
 import com.loan.business.MonthlyPayment;
 import com.loan.business.Mortgage;
 
@@ -15,6 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class MainController implements Initializable {
 
@@ -58,7 +62,20 @@ public class MainController implements Initializable {
 
     @FXML
     private void openChart() throws IOException {
-        WindowManager.newWindow("chart", "Chart", false);
+        WindowManager.newWindow("chart", "Chart", true);
+    }
+
+    @FXML
+    private void export() throws IOException {
+        Stage currentStage = (Stage) tableView.getScene().getWindow();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Export");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text file", "*.txt"));
+        File file = fileChooser.showSaveDialog(currentStage);
+        if (file != null) {
+            Exporter.ExportMortgage(file, Mortgage.getInstance().getDisplayPayments());
+        }
     }
 
     @Override

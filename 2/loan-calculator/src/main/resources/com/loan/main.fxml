@@ -17,7 +17,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#openFilter" text="Filter" />
                   <MenuItem mnemonicParsing="false" onAction="#openDefer" text="Defer" />
                   <MenuItem mnemonicParsing="false" onAction="#openChart" text="Chart" />
-                  <MenuItem mnemonicParsing="false" text="Export" />
+                  <MenuItem mnemonicParsing="false" onAction="#export" text="Export" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Help">

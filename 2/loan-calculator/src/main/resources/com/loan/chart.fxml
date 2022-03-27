@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.layout.VBox?>
@@ -11,12 +10,12 @@
       <Insets bottom="20.0" left="50.0" right="50.0" top="20.0" />
    </padding>
    <children>
-      <LineChart fx:id="lineChart">
+      <LineChart fx:id="lineChart" legendVisible="false" title="Monthly payments">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+          <NumberAxis label="Months" side="BOTTOM" />
         </xAxis>
         <yAxis>
-          <NumberAxis side="LEFT" />
+          <NumberAxis label="Amount" side="LEFT" />
         </yAxis>
       </LineChart>
    </children>
