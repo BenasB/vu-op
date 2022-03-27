@@ -7,12 +7,13 @@ import com.loan.dto.NewInputData;
 
 public abstract class Mortgage {
 
+    private MonthlyPayment[] displayPayments;
     private MonthlyPayment[] monthlyPayments;
     private NewInputData startingData;
     private static Mortgage instance;
 
-    public MonthlyPayment[] getMonthlyPayments() {
-        return monthlyPayments;
+    public MonthlyPayment[] getDisplayPayments() {
+        return displayPayments;
     }
 
     public static Mortgage getInstance() {
@@ -26,13 +27,14 @@ public abstract class Mortgage {
     Mortgage(NewInputData inputData) {
         startingData = inputData;
         monthlyPayments = generateMonthlyPayments(inputData);
+        displayPayments = generateMonthlyPayments(inputData);
         instance = this;
     }
 
     abstract MonthlyPayment[] generateMonthlyPayments(NewInputData inputData);
 
     public void filter(FilterInputData inputData) {
-        monthlyPayments = Arrays.stream(monthlyPayments).filter(payment -> payment.inInterval(inputData))
+        displayPayments = Arrays.stream(monthlyPayments).filter(payment -> payment.inInterval(inputData))
                 .toArray(MonthlyPayment[]::new);
     }
 }

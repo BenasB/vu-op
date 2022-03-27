@@ -70,7 +70,7 @@ public class MainController implements Initializable {
 
     private void updateTable() {
         Mortgage mortgage = Mortgage.getInstance();
-        ObservableList<MonthlyPayment> list = FXCollections.observableArrayList(mortgage.getMonthlyPayments());
+        ObservableList<MonthlyPayment> list = FXCollections.observableArrayList(mortgage.getDisplayPayments());
         tableView.setItems(list);
     }
 }
