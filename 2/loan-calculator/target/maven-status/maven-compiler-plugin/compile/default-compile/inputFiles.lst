@@ -6,6 +6,7 @@
 /home/benas/Programming/vu-op/2/loan-calculator/src/main/java/com/loan/WindowManager.java
 /home/benas/Programming/vu-op/2/loan-calculator/src/main/java/com/loan/dto/DeferInputData.java
 /home/benas/Programming/vu-op/2/loan-calculator/src/main/java/com/loan/controllers/FilterController.java
+/home/benas/Programming/vu-op/2/loan-calculator/src/main/java/com/loan/controllers/ChartController.java
 /home/benas/Programming/vu-op/2/loan-calculator/src/main/java/com/loan/business/MonthlyPayment.java
 /home/benas/Programming/vu-op/2/loan-calculator/src/main/java/com/loan/App.java
 /home/benas/Programming/vu-op/2/loan-calculator/src/main/java/com/loan/controllers/DeferController.java

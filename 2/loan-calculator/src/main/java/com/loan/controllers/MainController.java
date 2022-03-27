@@ -56,6 +56,11 @@ public class MainController implements Initializable {
         WindowManager.newWindow("filter", "Filter", false);
     }
 
+    @FXML
+    private void openChart() throws IOException {
+        WindowManager.newWindow("chart", "Chart", false);
+    }
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         tcMonth.setCellValueFactory(new PropertyValueFactory<MonthlyPayment, Integer>("month"));
