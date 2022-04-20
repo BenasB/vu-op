@@ -12,8 +12,8 @@
         <menus>
             <Menu mnemonicParsing="false" text="New">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Student" />
-                  <MenuItem mnemonicParsing="false" text="Group" />
+                  <MenuItem mnemonicParsing="false" onAction="#openNewStudent" text="Student" />
+                  <MenuItem mnemonicParsing="false" onAction="#openNewGroup" text="Group" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Manage">
