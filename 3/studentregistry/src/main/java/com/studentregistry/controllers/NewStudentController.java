@@ -1,5 +1,6 @@
 package com.studentregistry.controllers;
 
+import com.studentregistry.business.StudentRegistry;
 import com.studentregistry.dto.NewStudentInputData;
 
 import javafx.fxml.FXML;
@@ -34,5 +35,9 @@ public class NewStudentController {
     private void createStudent() {
         NewStudentInputData inputData = new NewStudentInputData(firstNameField.getText(), lastNameField.getText(),
                 courseSpinner.getValue(), groupField.getText());
+
+        StudentRegistry registry = StudentRegistry.getInstance();
+        registry.addStudent(inputData);
+        closeWindow();
     }
 }
