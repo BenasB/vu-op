@@ -1,6 +1,5 @@
 package com.studentregistry.io;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,8 +13,8 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 public class StudentExcelExporter extends Exporter {
 
-  public StudentExcelExporter(Stage stage, Exportable[] items) {
-    super(stage, "Export students", "students.xlsx", items);
+  public StudentExcelExporter(Stage stage) {
+    super(stage, "Export students", "students.xlsx");
   }
 
   @Override
@@ -26,7 +25,7 @@ public class StudentExcelExporter extends Exporter {
   }
 
   @Override
-  void export(File file, Exportable[] items) {
+  public void export(Exportable[] items) {
     XSSFWorkbook workbook = new XSSFWorkbook();
 
     XSSFSheet sheet = workbook.createSheet("Students");

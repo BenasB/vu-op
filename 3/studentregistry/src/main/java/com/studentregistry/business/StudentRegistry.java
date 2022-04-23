@@ -3,7 +3,9 @@ package com.studentregistry.business;
 import com.studentregistry.dto.NewStudentInputData;
 import com.studentregistry.io.Exportable;
 import com.studentregistry.io.StudentCSVExporter;
+import com.studentregistry.io.StudentCSVImporter;
 import com.studentregistry.io.StudentExcelExporter;
+import com.studentregistry.io.StudentExcelImporter;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,11 +39,25 @@ public class StudentRegistry {
   }
 
   public void exportStudentsCSV(Stage stage) {
-    new StudentCSVExporter(stage, students.toArray(Exportable[]::new));
+    new StudentCSVExporter(stage).export(students.toArray(Exportable[]::new));
   }
 
   public void exportStudentsExcel(Stage stage) {
-    new StudentExcelExporter(stage, students.toArray(Exportable[]::new));
+    new StudentExcelExporter(stage).export(students.toArray(Exportable[]::new));
+  }
+
+  public void importStudentsCSV(Stage stage) {
+    NewStudentInputData[] inputDataArray = new StudentCSVImporter(stage).importData();
+    for (NewStudentInputData inputData : inputDataArray) {
+      addStudent(inputData);
+    }
+  }
+
+  public void importStudentsExcel(Stage stage) {
+    NewStudentInputData[] inputDataArray = new StudentExcelImporter(stage).importData();
+    for (NewStudentInputData inputData : inputDataArray) {
+      addStudent(inputData);
+    }
   }
 
   public ObservableList<Student> getStudents() {

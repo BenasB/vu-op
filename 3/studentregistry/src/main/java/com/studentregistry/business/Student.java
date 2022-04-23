@@ -18,11 +18,11 @@ public class Student implements Exportable {
 
   public Student(NewStudentInputData inputData, TableView<Student> mainTable) {
     id = UUID.randomUUID().toString();
-    this.mainTable = mainTable;
     firstName = inputData.firstName;
     lastName = inputData.lastName;
     course = inputData.course;
     group = inputData.group;
+    this.mainTable = mainTable;
   }
 
   public void update(UpdateStudentInputData inputData) {
@@ -55,6 +55,6 @@ public class Student implements Exportable {
 
   @Override
   public String[] getExportableRow() {
-    return new String[] { id, firstName, lastName, course.toString(), group };
+    return new String[] { firstName, lastName, course.toString(), group };
   }
 }

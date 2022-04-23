@@ -1,7 +1,6 @@
 package com.studentregistry.io;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -10,8 +9,8 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 public class StudentCSVExporter extends Exporter {
 
-  public StudentCSVExporter(Stage stage, Exportable[] items) {
-    super(stage, "Export students", "students.csv", items);
+  public StudentCSVExporter(Stage stage) {
+    super(stage, "Export students", "students.csv");
   }
 
   @Override
@@ -22,7 +21,7 @@ public class StudentCSVExporter extends Exporter {
   }
 
   @Override
-  void export(File file, Exportable[] items) {
+  public void export(Exportable[] items) {
     try {
       BufferedWriter writer = new BufferedWriter(new FileWriter(file));
       for (Exportable row : items) {

@@ -58,6 +58,18 @@ public class MainController implements Initializable {
         registry.exportStudentsExcel(currentStage);
     }
 
+    @FXML
+    private void importStudentsCSV() {
+        Stage currentStage = (Stage) tableView.getScene().getWindow();
+        registry.importStudentsCSV(currentStage);
+    }
+
+    @FXML
+    private void importStudentsExcel() {
+        Stage currentStage = (Stage) tableView.getScene().getWindow();
+        registry.importStudentsExcel(currentStage);
+    }
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {

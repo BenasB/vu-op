@@ -20,7 +20,8 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Manage">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Import students" />
+                  <MenuItem mnemonicParsing="false" onAction="#importStudentsCSV" text="Import students (CSV)" />
+                  <MenuItem mnemonicParsing="false" onAction="#importStudentsExcel" text="Import students (Excel)" />
                   <MenuItem mnemonicParsing="false" onAction="#exportStudentsCSV" text="Export students (CSV)" />
                   <MenuItem mnemonicParsing="false" onAction="#exportStudentsExcel" text="Export students (Excel)" />
                   <MenuItem mnemonicParsing="false" text="Export Table" />
