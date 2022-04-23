@@ -11,6 +11,7 @@ import com.studentregistry.business.StudentRegistry;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 public class MainController implements Initializable {
 
@@ -43,6 +44,18 @@ public class MainController implements Initializable {
     private void deleteStudent() {
         Student studentToDelete = tableView.getSelectionModel().getSelectedItem();
         registry.deleteStudent(studentToDelete);
+    }
+
+    @FXML
+    private void exportStudentsCSV() {
+        Stage currentStage = (Stage) tableView.getScene().getWindow();
+        registry.exportStudentsCSV(currentStage);
+    }
+
+    @FXML
+    private void exportStudentsExcel() {
+        Stage currentStage = (Stage) tableView.getScene().getWindow();
+        registry.exportStudentsExcel(currentStage);
     }
 
     @Override

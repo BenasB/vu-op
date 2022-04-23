@@ -4,10 +4,11 @@ import java.util.UUID;
 
 import com.studentregistry.dto.NewStudentInputData;
 import com.studentregistry.dto.UpdateStudentInputData;
+import com.studentregistry.io.Exportable;
 
 import javafx.scene.control.TableView;
 
-public class Student {
+public class Student implements Exportable {
   private String id;
   private String firstName;
   private String lastName;
@@ -53,7 +54,7 @@ public class Student {
   }
 
   @Override
-  public String toString() {
-    return id + ", " + firstName + ", " + lastName + ", " + course + ", " + group;
+  public String[] getExportableRow() {
+    return new String[] { id, firstName, lastName, course.toString(), group };
   }
 }
