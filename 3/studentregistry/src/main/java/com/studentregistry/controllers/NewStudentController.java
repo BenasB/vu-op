@@ -1,8 +1,10 @@
 package com.studentregistry.controllers;
 
+import com.studentregistry.dto.NewStudentInputData;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -14,7 +16,10 @@ public class NewStudentController {
     TextField lastNameField;
 
     @FXML
-    ChoiceBox<String> groupChoiceBox;
+    Spinner<Integer> courseSpinner;
+
+    @FXML
+    TextField groupField;
 
     @FXML
     Button cancelButton;
@@ -23,5 +28,11 @@ public class NewStudentController {
     private void closeWindow() {
         Stage currentStage = (Stage) cancelButton.getScene().getWindow();
         currentStage.close();
+    }
+
+    @FXML
+    private void createStudent() {
+        NewStudentInputData inputData = new NewStudentInputData(firstNameField.getText(), lastNameField.getText(),
+                courseSpinner.getValue(), groupField.getText());
     }
 }
