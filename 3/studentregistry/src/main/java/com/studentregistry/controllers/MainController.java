@@ -41,6 +41,26 @@ public class MainController implements Initializable {
     }
 
     @FXML
+    private void openUpdateStudentAttendance() throws IOException {
+        selectedStudent = tableView.getSelectionModel().getSelectedItem();
+
+        if (selectedStudent == null)
+            return;
+
+        WindowManager.newWindow("update-student-attendance", "Update student attendance", false);
+    }
+
+    @FXML
+    private void openUpdateGroupAttendance() throws IOException {
+        selectedStudent = tableView.getSelectionModel().getSelectedItem();
+
+        if (selectedStudent == null)
+            return;
+
+        WindowManager.newWindow("update-group-attendance", "Update group attendance", false);
+    }
+
+    @FXML
     private void deleteStudent() {
         Student studentToDelete = tableView.getSelectionModel().getSelectedItem();
         registry.deleteStudent(studentToDelete);

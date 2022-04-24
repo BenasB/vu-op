@@ -55,8 +55,10 @@
         <contextMenu>
             <ContextMenu>
                   <items>
-                     <MenuItem fx:id="tableContextUpdate" onAction="#openUpdateStudent" text="Update" />
-                     <MenuItem fx:id="tableContextDelete" onAction="#deleteStudent" text="Delete" />
+                     <MenuItem fx:id="tableContextUpdate" onAction="#openUpdateStudentAttendance" text="Update student attendance" />
+                     <MenuItem fx:id="tableContextDelete" onAction="#openUpdateGroupAttendance" text="Update group attendance" />
+                     <MenuItem fx:id="tableContextUpdate" onAction="#openUpdateStudent" text="Update student" />
+                     <MenuItem fx:id="tableContextDelete" onAction="#deleteStudent" text="Delete student" />
                   </items>
             </ContextMenu>
          </contextMenu>

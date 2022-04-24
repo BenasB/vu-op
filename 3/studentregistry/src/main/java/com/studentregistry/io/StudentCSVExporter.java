@@ -25,7 +25,7 @@ public class StudentCSVExporter extends Exporter {
     try {
       BufferedWriter writer = new BufferedWriter(new FileWriter(file));
       for (Exportable row : items) {
-        writer.write(String.join(", ", row.getExportableRow()));
+        writer.write(String.join(",", row.getExportableRow()));
         writer.newLine();
       }
       writer.close();

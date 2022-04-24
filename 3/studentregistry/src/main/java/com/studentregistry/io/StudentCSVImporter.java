@@ -37,7 +37,7 @@ public class StudentCSVImporter extends Importer<NewStudentInputData> {
     try {
       String row;
       while ((row = reader.readLine()) != null) {
-        String[] columns = row.split(", ");
+        String[] columns = row.split(",");
         NewStudentInputData inputData = new NewStudentInputData(columns[0], columns[1], Integer.parseInt(columns[2]),
             columns[3]);
 
