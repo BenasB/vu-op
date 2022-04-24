@@ -2,6 +2,8 @@ package com.studentregistry.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ResourceBundle;
 
 import com.studentregistry.WindowManager;
@@ -10,6 +12,7 @@ import com.studentregistry.business.StudentRegistry;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
@@ -24,6 +27,12 @@ public class MainController implements Initializable {
 
     @FXML
     TableView<Student> tableView;
+
+    @FXML
+    DatePicker fromDatePicker;
+
+    @FXML
+    DatePicker toDatePicker;
 
     @FXML
     private void openNewStudent() throws IOException {
@@ -94,6 +103,31 @@ public class MainController implements Initializable {
     private void exportTablePDF() {
         Stage currentStage = (Stage) tableView.getScene().getWindow();
         registry.exportTablePDF(currentStage);
+    }
+
+    @FXML
+    private void resetAttendanceFilter() {
+        fromDatePicker.setValue(null);
+        toDatePicker.setValue(null);
+        tableView.getColumns().forEach(c -> c.setVisible(true));
+    }
+
+    @FXML
+    private void filterAttendance() {
+        tableView.getColumns().forEach(c -> {
+            LocalDate columnDate;
+            try {
+                columnDate = LocalDate.parse(c.getText());
+            } catch (DateTimeParseException e) {
+                return;
+            }
+
+            c.setVisible(dateWithinRange(columnDate));
+        });
+    }
+
+    private boolean dateWithinRange(LocalDate date) {
+        return !date.isBefore(fromDatePicker.getValue()) && !date.isAfter(toDatePicker.getValue());
     }
 
     @Override

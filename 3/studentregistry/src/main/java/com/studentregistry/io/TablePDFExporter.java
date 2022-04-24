@@ -42,15 +42,19 @@ public class TablePDFExporter extends Exporter<TableView<Student>> {
 
     doc.open();
 
-    PdfPTable table = new PdfPTable(items.getColumns().size());
+    PdfPTable table = new PdfPTable(items.getColumns().filtered(c -> c.isVisible()).size());
 
     for (int j = 0; j < items.getColumns().size(); j++) {
-      table.addCell(new Phrase(items.getColumns().get(j).getText()));
+      if (items.getColumns().get(j).isVisible())
+        table.addCell(new Phrase(items.getColumns().get(j).getText()));
     }
     table.completeRow();
 
     for (int i = 0; i < items.getItems().size(); i++) {
       for (int j = 0; j < items.getColumns().size(); j++) {
+        if (!items.getColumns().get(j).isVisible())
+          continue;
+
         if (items.getColumns().get(j).getCellData(i) != null) {
           table.addCell(new Phrase(items.getColumns().get(j).getCellData(i).toString()));
         } else {
@@ -65,6 +69,7 @@ public class TablePDFExporter extends Exporter<TableView<Student>> {
     } catch (DocumentException e) {
       System.err.println("Failed to add the table to the pdf document");
     }
+
     doc.close();
     writer.close();
   }
