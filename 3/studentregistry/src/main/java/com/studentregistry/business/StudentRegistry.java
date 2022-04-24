@@ -6,6 +6,7 @@ import com.studentregistry.io.StudentCSVExporter;
 import com.studentregistry.io.StudentCSVImporter;
 import com.studentregistry.io.StudentExcelExporter;
 import com.studentregistry.io.StudentExcelImporter;
+import com.studentregistry.io.TablePDFExporter;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,6 +59,10 @@ public class StudentRegistry {
     for (NewStudentInputData inputData : inputDataArray) {
       addStudent(inputData);
     }
+  }
+
+  public void exportTablePDF(Stage stage) {
+    new TablePDFExporter(stage).export(mainTable);
   }
 
   public ObservableList<Student> getStudents() {

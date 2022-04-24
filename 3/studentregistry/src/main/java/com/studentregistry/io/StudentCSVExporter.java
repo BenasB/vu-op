@@ -7,7 +7,7 @@ import java.io.IOException;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
-public class StudentCSVExporter extends Exporter {
+public class StudentCSVExporter extends Exporter<Exportable[]> {
 
   public StudentCSVExporter(Stage stage) {
     super(stage, "Export students", "students.csv");

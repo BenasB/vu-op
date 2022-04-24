@@ -90,6 +90,12 @@ public class MainController implements Initializable {
         registry.importStudentsExcel(currentStage);
     }
 
+    @FXML
+    private void exportTablePDF() {
+        Stage currentStage = (Stage) tableView.getScene().getWindow();
+        registry.exportTablePDF(currentStage);
+    }
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {

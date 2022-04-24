@@ -24,7 +24,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#importStudentsExcel" text="Import students (Excel)" />
                   <MenuItem mnemonicParsing="false" onAction="#exportStudentsCSV" text="Export students (CSV)" />
                   <MenuItem mnemonicParsing="false" onAction="#exportStudentsExcel" text="Export students (Excel)" />
-                  <MenuItem mnemonicParsing="false" text="Export Table" />
+                  <MenuItem mnemonicParsing="false" onAction="#exportTablePDF" text="Export Table (PDF)" />
                </items>
             </Menu>
         </menus>

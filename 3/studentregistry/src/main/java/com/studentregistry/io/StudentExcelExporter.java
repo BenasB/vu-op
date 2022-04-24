@@ -11,7 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
-public class StudentExcelExporter extends Exporter {
+public class StudentExcelExporter extends Exporter<Exportable[]> {
 
   public StudentExcelExporter(Stage stage) {
     super(stage, "Export students", "students.xlsx");
