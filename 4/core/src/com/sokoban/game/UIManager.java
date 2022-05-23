@@ -38,7 +38,7 @@ public class UIManager implements Disposable {
         table.setDebug(true); // This is optional, but enables debug lines for tables.
     }
 
-    public void render() {
+    public void draw() {
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }

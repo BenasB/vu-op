@@ -41,8 +41,9 @@ public class SokobanGame extends ApplicationAdapter {
 		map.render(batch);
 		player.render(batch);
 		flag.render(batch);
-		uiManager.render();
 		batch.end();
+
+		uiManager.draw();
 
 		player.update();
 		camera.update();

@@ -28,23 +28,23 @@ public class Player extends Entity implements IResetableEntity {
         GridPoint2 newPosition = position.cpy();
         Texture newTexture = currentWalkingTexture;
 
-        if (Gdx.input.isKeyJustPressed(Keys.LEFT)) {
-            newPosition.x--;
-            newTexture = walkingTextures[3];
-        }
-        if (Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
-            newPosition.x++;
-            newTexture = walkingTextures[1];
-        }
+        // if (Gdx.input.isKeyJustPressed(Keys.LEFT)) {
+        // newPosition.x--;
+        // newTexture = walkingTextures[3];
+        // }
+        // if (Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
+        // newPosition.x++;
+        // newTexture = walkingTextures[1];
+        // }
 
-        if (Gdx.input.isKeyJustPressed(Keys.DOWN)) {
-            newPosition.y--;
-            newTexture = walkingTextures[2];
-        }
-        if (Gdx.input.isKeyJustPressed(Keys.UP)) {
-            newPosition.y++;
-            newTexture = walkingTextures[0];
-        }
+        // if (Gdx.input.isKeyJustPressed(Keys.DOWN)) {
+        // newPosition.y--;
+        // newTexture = walkingTextures[2];
+        // }
+        // if (Gdx.input.isKeyJustPressed(Keys.UP)) {
+        // newPosition.y++;
+        // newTexture = walkingTextures[0];
+        // }
 
         if (map.isValidPosition(newPosition)) {
             position = newPosition;
