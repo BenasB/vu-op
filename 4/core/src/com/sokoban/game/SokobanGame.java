@@ -37,12 +37,11 @@ public class SokobanGame extends ApplicationAdapter {
 		camera.internal.update();
 		batch.setProjectionMatrix(camera.internal.combined);
 
-		uiManager.render();
-
 		batch.begin();
 		map.render(batch);
 		player.render(batch);
 		flag.render(batch);
+		uiManager.render();
 		batch.end();
 
 		player.update();
