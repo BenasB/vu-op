@@ -12,21 +12,23 @@ public class SokobanGame extends ApplicationAdapter {
 	private GameCamera camera;
 	private SpriteBatch batch;
 
-	private GameManager gameManager;
 	private Player player;
 	private Flag flag;
 	private DynamicMap map;
+	private UIManager uiManager;
 
 	@Override
 	public void create() {
 		OrthographicCamera internalCamera = new OrthographicCamera();
 		batch = new SpriteBatch();
 
+		uiManager = new UIManager();
+
 		map = new DynamicMap(internalCamera);
 		player = new Player(map);
 		camera = new GameCamera(internalCamera, player);
 		flag = new Flag(player);
-		gameManager = new GameManager(camera, player, flag, map);
+		new GameManager(camera, player, flag, map);
 	}
 
 	@Override
@@ -34,6 +36,8 @@ public class SokobanGame extends ApplicationAdapter {
 		ScreenUtils.clear(new Color(0x333333ff));
 		camera.internal.update();
 		batch.setProjectionMatrix(camera.internal.combined);
+
+		uiManager.render();
 
 		batch.begin();
 		map.render(batch);
@@ -52,5 +56,6 @@ public class SokobanGame extends ApplicationAdapter {
 		player.dispose();
 		flag.dispose();
 		map.dispose();
+		uiManager.dispose();
 	}
 }
