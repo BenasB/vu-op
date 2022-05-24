@@ -37,8 +37,6 @@ public class UIManager implements Disposable {
                 .height(Value.percentHeight(.3F, table)).row();
 
         stage.addActor(table);
-
-        table.setDebug(true); // This is optional, but enables debug lines for tables.
     }
 
     public void draw() {

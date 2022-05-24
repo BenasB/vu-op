@@ -1,5 +1,6 @@
 package com.sokoban.game.parser;
 
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 public class Parser extends Thread {
@@ -14,7 +15,8 @@ public class Parser extends Thread {
     }
 
     public void run() {
-        button.setDisabled(true);
+        button.setTouchable(Touchable.disabled);
+        button.setText("Running");
 
         String[] lines = codeInput.split("\n");
         for (String line : lines) {
@@ -31,7 +33,8 @@ public class Parser extends Thread {
             }
         }
 
-        button.setDisabled(false);
+        button.setText("Run");
+        button.setTouchable(Touchable.enabled);
     }
 
     private void handleLine(String line) {

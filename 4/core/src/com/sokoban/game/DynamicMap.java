@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.MathUtils;
 public class DynamicMap implements Disposable {
 
     static final GridPoint2 BLOCK_SIZE = new GridPoint2(64, 64); // In pixels
-    static final GridPoint2 SIZE = new GridPoint2(20, 20); // In game blocks
+    static final GridPoint2 SIZE = new GridPoint2(10, 10); // In game blocks
 
     private final OrthographicCamera camera;
     private final Vector3 mouseInWorld3D = new Vector3();
