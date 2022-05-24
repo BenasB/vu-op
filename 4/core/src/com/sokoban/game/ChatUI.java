@@ -29,6 +29,7 @@ public class ChatUI implements Disposable {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 client.write(messageField.getText());
+                messageField.setText("");
             }
         });
 
