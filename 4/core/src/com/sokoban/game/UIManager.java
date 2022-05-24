@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 public class UIManager implements Disposable {
     private Stage stage;
     private Skin defaultSkin;
+    private ChatUI chat = new ChatUI();
 
     public UIManager() {
         defaultSkin = new Skin(Gdx.files.internal("cloud-form-ui.json"));
@@ -30,7 +31,8 @@ public class UIManager implements Disposable {
 
         table.add(CodeField.getActor(defaultSkin)).width(Value.percentWidth(.8F, table))
                 .height(Value.percentHeight(.7F, table)).row();
-        table.add(Chat.getActor(defaultSkin)).width(Value.percentWidth(.8F, table))
+
+        table.add(chat.getActor(defaultSkin)).width(Value.percentWidth(.8F, table))
                 .height(Value.percentHeight(.3F, table)).row();
 
         stage.addActor(table);
@@ -46,5 +48,6 @@ public class UIManager implements Disposable {
     @Override
     public void dispose() {
         stage.dispose();
+        chat.dispose();
     }
 }
