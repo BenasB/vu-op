@@ -31,9 +31,16 @@ public class GameManager {
   public void LoadNewLevel() {
     currentMap = (currentMap + 1) % indexMaps.length;
 
+    if (UIManager.getInstance() != null)
+      UIManager.getInstance().disposeCodeRunner();
+
     dynamicMap.initialize(indexMaps[currentMap]);
     player.reset(indexMaps[currentMap].playerPosition);
     flag.reset(indexMaps[currentMap].flagPosition);
+  }
+
+  public void resetPlayer() {
+    player.reset(indexMaps[currentMap].playerPosition);
   }
 
   public Player getPlayer() {

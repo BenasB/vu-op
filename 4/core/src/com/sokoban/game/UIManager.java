@@ -13,12 +13,20 @@ import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class UIManager implements Disposable {
+    private static UIManager Instance;
     private Stage stage;
     private Skin defaultSkin;
     private ChatUI chat = new ChatUI();
     private CodeField codeField = new CodeField();
 
+    public static UIManager getInstance() {
+        return Instance;
+    }
+
     public UIManager() {
+        if (Instance == null)
+            Instance = this;
+
         defaultSkin = new Skin(Gdx.files.internal("cloud-form-ui.json"));
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
@@ -44,9 +52,14 @@ public class UIManager implements Disposable {
         stage.draw();
     }
 
+    public void disposeCodeRunner() {
+        codeField.dispose();
+    }
+
     @Override
     public void dispose() {
         stage.dispose();
         chat.dispose();
+        codeField.dispose();
     }
 }
