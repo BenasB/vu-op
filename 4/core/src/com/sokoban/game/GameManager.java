@@ -11,6 +11,13 @@ public class GameManager {
       IndexMap.MAP_ONE(),
       IndexMap.MAP_TWO(),
       IndexMap.MAP_THREE(),
+      IndexMap.MAP_FOUR(),
+      IndexMap.MAP_FIVE(),
+      IndexMap.MAP_SIX(),
+      IndexMap.MAP_SEVEN(),
+      IndexMap.MAP_EIGHT(),
+      IndexMap.MAP_NINE(),
+      IndexMap.MAP_TEN()
   };
 
   private int currentMap = -1;
