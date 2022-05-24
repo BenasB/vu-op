@@ -1,7 +1,6 @@
 package com.sokoban.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.GridPoint2;
@@ -18,6 +17,8 @@ public class Player extends Entity implements IResetableEntity {
 
     private Texture currentWalkingTexture = walkingTextures[2];
 
+    private Integer dx = 0, dy = 0;
+
     public Player(DynamicMap map) {
         super("player-south.png", new GridPoint2());
 
@@ -25,30 +26,10 @@ public class Player extends Entity implements IResetableEntity {
     }
 
     public void update() {
-        GridPoint2 newPosition = position.cpy();
-        Texture newTexture = currentWalkingTexture;
-
-        // if (Gdx.input.isKeyJustPressed(Keys.LEFT)) {
-        // newPosition.x--;
-        // newTexture = walkingTextures[3];
-        // }
-        // if (Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
-        // newPosition.x++;
-        // newTexture = walkingTextures[1];
-        // }
-
-        // if (Gdx.input.isKeyJustPressed(Keys.DOWN)) {
-        // newPosition.y--;
-        // newTexture = walkingTextures[2];
-        // }
-        // if (Gdx.input.isKeyJustPressed(Keys.UP)) {
-        // newPosition.y++;
-        // newTexture = walkingTextures[0];
-        // }
-
-        if (map.isValidPosition(newPosition)) {
-            position = newPosition;
-            currentWalkingTexture = newTexture;
+        if (dx != 0 || dy != 0) {
+            move(dx, dy);
+            dx = 0;
+            dy = 0;
         }
     }
 
@@ -69,5 +50,46 @@ public class Player extends Entity implements IResetableEntity {
     public void reset(GridPoint2 newPosition) {
         position.set(newPosition);
         currentWalkingTexture = walkingTextures[2];
+    }
+
+    private void move(Integer deltax, Integer deltay) {
+        GridPoint2 newPosition = position.cpy();
+        Texture newTexture = currentWalkingTexture;
+        newPosition.x += deltax;
+        newPosition.y += deltay;
+
+        if (deltax > 0)
+            newTexture = walkingTextures[1];
+        else if (deltax < 0)
+            newTexture = walkingTextures[3];
+        else if (deltay > 0)
+            newTexture = walkingTextures[0];
+        else if (deltay < 0)
+            newTexture = walkingTextures[2];
+
+        if (map.isValidPosition(newPosition)) {
+            position = newPosition;
+            currentWalkingTexture = newTexture;
+        }
+    }
+
+    public void moveUp() {
+        dx = 0;
+        dy = 1;
+    }
+
+    public void moveDown() {
+        dx = 0;
+        dy = -1;
+    }
+
+    public void moveRight() {
+        dx = 1;
+        dy = 0;
+    }
+
+    public void moveLeft() {
+        dx = -1;
+        dy = 0;
     }
 }

@@ -3,7 +3,7 @@ package com.sokoban.game;
 public class GameManager {
   private static GameManager instance;
 
-  private final IResetableEntity player;
+  private final Player player;
   private final IResetableEntity flag;
   private final DynamicMap dynamicMap;
 
@@ -15,7 +15,7 @@ public class GameManager {
 
   private int currentMap = -1;
 
-  public GameManager(GameCamera camera, IResetableEntity player, IResetableEntity flag, DynamicMap map) {
+  public GameManager(GameCamera camera, Player player, IResetableEntity flag, DynamicMap map) {
     this.player = player;
     this.flag = flag;
     this.dynamicMap = map;
@@ -34,5 +34,9 @@ public class GameManager {
     dynamicMap.initialize(indexMaps[currentMap]);
     player.reset(indexMaps[currentMap].playerPosition);
     flag.reset(indexMaps[currentMap].flagPosition);
+  }
+
+  public Player getPlayer() {
+    return player;
   }
 }

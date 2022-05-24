@@ -22,13 +22,13 @@ public class SokobanGame extends ApplicationAdapter {
 		OrthographicCamera internalCamera = new OrthographicCamera();
 		batch = new SpriteBatch();
 
-		uiManager = new UIManager();
-
 		map = new DynamicMap(internalCamera);
 		player = new Player(map);
 		camera = new GameCamera(internalCamera, player);
 		flag = new Flag(player);
 		new GameManager(camera, player, flag, map);
+
+		uiManager = new UIManager();
 	}
 
 	@Override
@@ -43,11 +43,11 @@ public class SokobanGame extends ApplicationAdapter {
 		flag.render(batch);
 		batch.end();
 
-		uiManager.draw();
-
 		player.update();
 		camera.update();
 		flag.update();
+
+		uiManager.draw();
 	}
 
 	@Override

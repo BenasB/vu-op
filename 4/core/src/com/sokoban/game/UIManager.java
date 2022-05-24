@@ -16,6 +16,7 @@ public class UIManager implements Disposable {
     private Stage stage;
     private Skin defaultSkin;
     private ChatUI chat = new ChatUI();
+    private CodeField codeField = new CodeField();
 
     public UIManager() {
         defaultSkin = new Skin(Gdx.files.internal("cloud-form-ui.json"));
@@ -29,7 +30,7 @@ public class UIManager implements Disposable {
         table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture(bgPixmap))));
         table.setBounds(0, 0, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight());
 
-        table.add(CodeField.getActor(defaultSkin)).width(Value.percentWidth(.8F, table))
+        table.add(codeField.getActor(defaultSkin)).width(Value.percentWidth(.8F, table))
                 .height(Value.percentHeight(.7F, table)).row();
 
         table.add(chat.getActor(defaultSkin)).width(Value.percentWidth(.8F, table))

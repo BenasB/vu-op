@@ -8,21 +8,27 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.sokoban.game.parser.Parser;
 
 public class CodeField {
-    public static Actor getActor(Skin defaultSkin) {
+    private TextArea codeArea;
+    private TextButton runButton;
+    private Parser parser;
+
+    public Actor getActor(Skin defaultSkin) {
         Table group = new Table();
-        TextArea codeArea = new TextArea("", defaultSkin);
-        TextButton button1 = new TextButton("Run", defaultSkin);
-        button1.addListener(new ClickListener() {
+        codeArea = new TextArea("", defaultSkin);
+        runButton = new TextButton("Run", defaultSkin);
+        runButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("HELO FROM CODE");
+                parser = new Parser(codeArea.getText(), runButton);
+                parser.start();
             }
         });
 
         group.add(codeArea).width(Value.percentWidth(1F, group)).height(Value.percentHeight(0.8F, group)).row();
-        group.add(button1).row();
+        group.add(runButton).row();
 
         return group;
     }
